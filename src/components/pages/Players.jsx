@@ -1,55 +1,23 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../../utils/supabaseClient";
+import { useSelect } from "react-supabase";
 
 export function Players() {
-  const [players, setPlayers] = useState([]);
-  const [teams, setTeams] = useState([]);
+  const [{ count, data: playersData, error, fetching }, reexecute] = useSelect(
+    "teams",
+    {
+      options: { count: "exact" },
+    }
+  );
+  if (fetching) return <p>Loading...</p>;
+  if (error) return <p>Oh no... {error.message}</p>;
 
-  const [selectedTeam, setSelectedTeam] = useState(null);
-
-  async function getPlayers() {
-    const { data: players } = await supabase.from("players").select("*");
-    const { data: teams } = await supabase.from("teams").select("*");
-    setPlayers(players);
-    setTeams(teams);
-  }
-
-  useEffect(() => {
-    getPlayers();
-  }, []);
+  if (!playersData || playersData?.length === 0) return <div>No leagues</div>;
   return (
     <>
-      <div>
-        <ul>
-          {teams.map((team) => (
-            <li key={team.id}>
-              <button
-                onClick={() => setSelectedTeam(team.id)}
-                disabled={team.id === selectedTeam}
-              >
-                <img src={team.img} height={30}></img>
-                {team.name}
-              </button>
-            </li>
-          ))}
-          <li>
-            <button
-              onClick={() => setSelectedTeam(null)}
-              disabled={selectedTeam === null}
-            >
-              all
-            </button>
-          </li>
-        </ul>
-      </div>
-      <li>
-        {players.map(
-          (player) =>
-            (!selectedTeam || player.team === selectedTeam) && (
-              <ul key={player.id}>{player.name}</ul>
-            )
-        )}
-      </li>
+      <ul>
+        {playersData.map((player) => (
+          <li key={player.id}>{player.name}</li>
+        ))}
+      </ul>
     </>
   );
 }
