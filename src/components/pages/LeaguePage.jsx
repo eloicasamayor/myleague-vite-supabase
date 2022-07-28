@@ -1,17 +1,15 @@
 // Dependencies
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux/es/exports";
-import { selectLeagues } from "../../store/leaguesSlice";
-import { selectTeams } from "../../store/teamsSlice";
+import { useParams, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLeagues, selectTeams } from "../../store";
 
 export function LeaguePage() {
-  const { leagueurlname } = useParams();
+  const { leagueUrlName } = useParams();
   const leaguesData = useSelector(selectLeagues);
   const teamsData = useSelector(selectTeams);
 
   const selectedLeague = leaguesData.find(
-    (league) => league.urlname === leagueurlname
+    (league) => league.urlname === leagueUrlName
   );
 
   const selectedLeagueTeams = teamsData.filter(

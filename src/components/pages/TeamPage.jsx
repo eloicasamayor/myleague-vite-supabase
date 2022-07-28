@@ -1,24 +1,27 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLeagues, selectTeams, selectPlayers } from "../../store";
 
 export function TeamPage() {
-  const { team } = useParams();
+  const { teamUrlName } = useParams();
+  const teamsData = useSelector(selectTeams);
+  const playersData = useSelector(selectPlayers);
 
-  const selectedTeamResult = {};
-
-  if (!selectedTeamResult?.data || selectedTeamResult.data.length === 0) {
-    return "no results";
-  }
-  const selectedTeamDetails = selectedTeamResult.data[0];
+  const selectedTeamDetails = teamsData.find(
+    (team) => team.urlname === teamUrlName
+  );
+  const selectedTeamPlayers = playersData.filter(
+    (player) => player.team === selectedTeamDetails.id
+  );
   return (
     <>
-      <h1>{selectedTeamDetails.name}</h1>
-      <img src={selectedTeamDetails.img}></img>
-      {teamHasNoPlayers ? (
+      <h1>{`${selectedTeamDetails.name}(${selectedTeamDetails.id})`}</h1>
+      {selectedTeamPlayers.length === 0 ? (
         <div>no players</div>
       ) : (
         <ul>
-          {selectedTeamPlayersResult.data.map((player) => (
-            <li>{player.name}</li>
+          {selectedTeamPlayers.map((player) => (
+            <li>{`${player.name}(${player.team})`}</li>
           ))}
         </ul>
       )}

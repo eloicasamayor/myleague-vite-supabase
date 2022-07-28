@@ -22,13 +22,13 @@ const teamsSlice = createSlice({
       league: 1,
     },
     {
-      id: 3,
+      id: 4,
       name: "Manchester city",
       urlname: "manchester-city",
       league: 3,
     },
     {
-      id: 3,
+      id: 5,
       name: "Paris",
       urlname: "paris",
       league: 2,
