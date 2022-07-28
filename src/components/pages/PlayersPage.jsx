@@ -1,16 +1,7 @@
-import { useSelect } from "react-supabase";
-
 export function PlayersPage() {
-  const [{ count, data: playersData, error, fetching }, reexecute] = useSelect(
-    "teams",
-    {
-      options: { count: "exact" },
-    }
-  );
-  if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Oh no... {error.message}</p>;
+  const playersData = [];
 
-  if (!playersData || playersData?.length === 0) return <div>No leagues</div>;
+  if (!playersData || playersData?.length === 0) return <div>No players</div>;
   return (
     <>
       <ul>

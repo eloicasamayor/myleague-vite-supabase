@@ -1,7 +1,6 @@
 // Dependencies
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
-import { Provider } from "react-supabase";
 
 // Utils
 import { client } from "./utils/supabaseClient";
@@ -20,17 +19,15 @@ import "../index.css";
 function App() {
   return (
     <div className="App">
-      <Provider value={client}>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/players" element={<PlayersPage />} />
-            <Route path="/leagues" element={<LeaguesPage />} />
-            <Route path="/leagues/:league" element={<LeaguePage />} />
-            <Route path="/leagues/:league/:team" element={<TeamPage />} />
-          </Routes>
-        </Layout>
-      </Provider>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/players" element={<PlayersPage />} />
+          <Route path="/leagues" element={<LeaguesPage />} />
+          <Route path="/leagues/:leagueurlname" element={<LeaguePage />} />
+          <Route path="/leagues/:leagueurlname/:team" element={<TeamPage />} />
+        </Routes>
+      </Layout>
     </div>
   );
 }

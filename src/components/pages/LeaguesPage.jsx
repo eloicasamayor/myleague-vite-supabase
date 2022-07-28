@@ -1,24 +1,24 @@
 // Dependencies
-import { useSelect } from "react-supabase";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import {
+  leagueAdded,
+  leagueEdited,
+  selectLeagues,
+} from "../../store/leaguesSlice";
 // Components
 import { Link } from "react-router-dom";
 
 export function LeaguesPage() {
-  const [{ count, data: leaguesData, error, fetching }, reexecute] = useSelect(
-    "leagues",
-    {
-      columns: "id, name, urlname",
-      options: { count: "exact" },
-    }
-  );
-  if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Oh no... {error.message}</p>;
+  const leaguesData = useSelector(selectLeagues);
+  // const dispatch = useDispatch();
+  // const [incrementAmount, setIncrementAmount] = useState("2");
 
   if (!leaguesData || leaguesData?.length === 0) return <div>No leagues</div>;
   return (
     <>
-      <h1>{`Leagues (${count})`}</h1>
+      <h1>{`Leagues`}</h1>
       <ul>
         {leaguesData.map((league) => (
           <li key={league.id}>
