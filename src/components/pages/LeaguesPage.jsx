@@ -4,7 +4,7 @@ import { useSelect } from "react-supabase";
 // Components
 import { Link } from "react-router-dom";
 
-export function Leagues() {
+export function LeaguesPage() {
   const [{ count, data: leaguesData, error, fetching }, reexecute] = useSelect(
     "leagues",
     {

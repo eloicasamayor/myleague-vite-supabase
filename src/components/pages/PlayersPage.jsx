@@ -1,6 +1,6 @@
 import { useSelect } from "react-supabase";
 
-export function Players() {
+export function PlayersPage() {
   const [{ count, data: playersData, error, fetching }, reexecute] = useSelect(
     "teams",
     {

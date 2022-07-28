@@ -1,16 +1,17 @@
 // Dependencies
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
+import { Provider } from "react-supabase";
 
 // Utils
 import { client } from "./utils/supabaseClient";
 
 // Components
 import { Home } from "./components/pages/Home";
-import { Players } from "./components/pages/Players";
-import { Leagues } from "./components/pages/Leagues";
-import { League } from "./components/pages/League";
-import { Provider } from "react-supabase";
+import { PlayersPage } from "./components/pages/PlayersPage";
+import { LeaguesPage } from "./components/pages/LeaguesPage";
+import { LeaguePage } from "./components/pages/LeaguePage";
+import { TeamPage } from "./components/pages/TeamPage";
 
 import { Layout } from "./components/Layout";
 
@@ -23,9 +24,10 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/players" element={<Players />} />
-            <Route path="/leagues" element={<Leagues />} />
-            <Route path="/leagues/:urlname" element={<League />} />
+            <Route path="/players" element={<PlayersPage />} />
+            <Route path="/leagues" element={<LeaguesPage />} />
+            <Route path="/leagues/:league" element={<LeaguePage />} />
+            <Route path="/leagues/:league/:team" element={<TeamPage />} />
           </Routes>
         </Layout>
       </Provider>
