@@ -1,12 +1,13 @@
 // Dependencies
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectLeagues, selectTeams } from "../../store";
+import { selectLeagues, selectTeams, selectMatches } from "../../store";
 
 export function LeaguePage() {
   const { leagueUrlName } = useParams();
   const leaguesData = useSelector(selectLeagues);
   const teamsData = useSelector(selectTeams);
+  const matchesData = useSelector(selectMatches);
 
   const selectedLeague = leaguesData.find(
     (league) => league.urlname === leagueUrlName
@@ -15,6 +16,21 @@ export function LeaguePage() {
   const selectedLeagueTeams = teamsData.filter(
     (team) => team.league === selectedLeague.id
   );
+
+  const selectedLeagueMatches = matchesData.filter(
+    (match) => match.league === selectedLeague.id
+  );
+
+  const teamNameWithId = (id) =>
+    selectedLeagueTeams.find((team) => team.id === id);
+
+  const formatedTimeFromTimeStamp = (timestamp) => {
+    let date = new Date(timestamp * 1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    let seconds = "0" + date.getSeconds();
+    return hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+  };
 
   if (!selectedLeague)
     return (
@@ -37,6 +53,18 @@ export function LeaguePage() {
               </li>
             ))
           : "no teams data"}
+      </ul>
+      <h3>Matches:</h3>
+      <ul>
+        {selectedLeagueMatches
+          ? selectedLeagueMatches.map((match) => (
+              <li key={`li_${match.id}`}>
+                {`(${formatedTimeFromTimeStamp(match.time)}) ${
+                  teamNameWithId(match.local_team).name
+                } vs ${teamNameWithId(match.visitor_team).name}`}
+              </li>
+            ))
+          : "no matches data"}
       </ul>
     </>
   );
