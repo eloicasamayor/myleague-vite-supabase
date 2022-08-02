@@ -7,7 +7,25 @@ const matchesSlice = createSlice({
       id: 1,
       local_team: 1,
       visitor_team: 2,
-      time: 1659042317,
+      time: "05 October 2011 14:48 UTC",
+      league: 1,
+      stats: {
+        visitor_goals: [
+          { player: 1, time: 20 },
+          { player: 2, time: 48 },
+        ],
+        local_goals: [
+          { player: 3, time: 70 },
+          { player: 4, time: 77 },
+        ],
+        winner: "draw",
+      },
+    },
+    {
+      id: 2,
+      local_team: 2,
+      visitor_team: 3,
+      time: "22 September 2011 10:30 UTC",
       league: 1,
       stats: {
         visitor_goals: [

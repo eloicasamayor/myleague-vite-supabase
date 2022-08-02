@@ -21,7 +21,7 @@ export function TeamPage() {
       ) : (
         <ul>
           {selectedTeamPlayers.map((player) => (
-            <li>{`${player.name}(${player.team})`}</li>
+            <li key={player.id}>{`${player.name}(${player.team})`}</li>
           ))}
         </ul>
       )}

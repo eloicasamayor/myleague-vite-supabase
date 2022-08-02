@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectLeagues, selectTeams, selectMatches } from "../../store";
 
+import { DateTime } from "luxon";
+
 export function LeaguePage() {
   const { leagueUrlName } = useParams();
   const leaguesData = useSelector(selectLeagues);
@@ -25,11 +27,8 @@ export function LeaguePage() {
     selectedLeagueTeams.find((team) => team.id === id);
 
   const formatedTimeFromTimeStamp = (timestamp) => {
-    let date = new Date(timestamp * 1000);
-    let hours = date.getHours();
-    let minutes = "0" + date.getMinutes();
-    let seconds = "0" + date.getSeconds();
-    return hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+    const myDateTime = new Date(timestamp);
+    return myDateTime.toString();
   };
 
   if (!selectedLeague)
