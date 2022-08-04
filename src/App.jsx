@@ -23,12 +23,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/players" element={<PlayersPage />} />
-          <Route path="/leagues" element={<LeaguesPage />} />
-          <Route path="/leagues/:leagueUrlName" element={<LeaguePage />} />
-          <Route
-            path="/leagues/:leagueUrlName/:teamUrlName"
-            element={<TeamPage />}
-          />
+          <Route path="/leagues">
+            <Route index element={<LeaguesPage />} />
+            <Route path=":leagueUrlName" element={<LeaguePage />} />
+            <Route path=":leagueUrlName/:teamUrlName" element={<TeamPage />} />
+          </Route>
         </Routes>
       </Layout>
     </div>

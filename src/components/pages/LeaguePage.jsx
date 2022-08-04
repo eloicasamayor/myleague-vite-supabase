@@ -55,7 +55,7 @@ export function LeaguePage() {
       </ul>
       <h3>Matches:</h3>
       <ul>
-        {selectedLeagueMatches
+        {selectedLeagueMatches && selectedLeagueMatches.length > 0
           ? selectedLeagueMatches.map((match) => (
               <li key={`li_${match.id}`}>
                 {`(${formatedTimeFromTimeStamp(match.time)}) ${

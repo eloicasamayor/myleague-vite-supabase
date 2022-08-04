@@ -9,9 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
-    "@mui/material": "^5.9.1",
     "@reduxjs/toolkit": "^1.8.3",
     "@supabase/supabase-js": "^1.35.4",
     "luxon": "^3.0.1",
